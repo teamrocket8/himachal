@@ -3,452 +3,280 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Himachal Trip Plan</title>
-<meta name="description" content="Team Rocket's Himachal trip: Manali, Sissu, Kasol, Bir, Barot and Amritsar, 15–23 Jan 2027.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏔️</text></svg>">
+<title>Himachal Trip Blueprint</title>
+<meta name="description" content="Team Rocket's Himachal trip: Manali, Sissu, Kasol, Bir, Barot, Amritsar. 15–23 Jan 2027.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛰</text></svg>">
 <style>
-:root{
-  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#eef1f5; --text:#14181f; --muted:#5b6575;
-  --border:#dde2ea; --accent:#2563eb; --accent-soft:#e3ecff;
-  --warn:#b45309; --warn-soft:#fff4e0; --danger:#b91c1c; --danger-soft:#fde8e8;
-  --ok:#15803d; --ok-soft:#e3f6e9;
-  --t-train:#7c3aed; --t-bus:#0e7490; --t-snow:#2563eb; --t-trek:#15803d; --t-fly:#c2410c; --t-city:#be185d; --t-stay:#475569;
-  --radius:14px;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#0f1218; --surface:#171b23; --surface-2:#1f2530; --text:#e7eaf0; --muted:#9aa4b4;
-    --border:#2a313d; --accent:#7aa2ff; --accent-soft:#1d2a47;
-    --warn:#f5b453; --warn-soft:#3a2a10; --danger:#f38b8b; --danger-soft:#3b1717;
-    --ok:#6ad08f; --ok-soft:#123222;
-    --t-train:#b69cff; --t-bus:#5cc8dc; --t-snow:#7aa2ff; --t-trek:#6ad08f; --t-fly:#ff9c66; --t-city:#f080b8; --t-stay:#a5b0c0;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#0f1218; --surface:#171b23; --surface-2:#1f2530; --text:#e7eaf0; --muted:#9aa4b4;
-  --border:#2a313d; --accent:#7aa2ff; --accent-soft:#1d2a47;
-  --warn:#f5b453; --warn-soft:#3a2a10; --danger:#f38b8b; --danger-soft:#3b1717;
-  --ok:#6ad08f; --ok-soft:#123222;
-  --t-train:#b69cff; --t-bus:#5cc8dc; --t-snow:#7aa2ff; --t-trek:#6ad08f; --t-fly:#ff9c66; --t-city:#f080b8; --t-stay:#a5b0c0;
-}
+@font-face{font-family:Virgil;src:url(Virgil.woff2) format("woff2");font-display:swap}
+:root{--bg:#0d3b78;--line:rgba(255,255,255,.85);--soft:rgba(255,255,255,.3);--grid:rgba(255,255,255,.07)}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:64px}
-body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
-a{color:var(--accent)}
-.wrap{max-width:860px;margin:0 auto;padding:0 16px}
-header.hero{padding:32px 0 18px}
-.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
-h1{font-size:30px;line-height:1.15;margin:6px 0 8px}
-.route{color:var(--muted);font-size:14px}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:18px}
-.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px}
-.stat b{display:block;font-size:20px;line-height:1.2}
-.stat span{font-size:12.5px;color:var(--muted)}
-.stat.alert{background:var(--warn-soft);border-color:transparent}
-.stat.alert b{color:var(--warn)}
-nav.chips{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
-nav.chips .wrap{display:flex;gap:6px;overflow-x:auto;padding:10px 16px;scrollbar-width:none}
-nav.chips .wrap::-webkit-scrollbar{display:none}
-nav.chips a{flex:none;text-decoration:none;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:5px 12px;font-size:13px;white-space:nowrap}
-nav.chips a:hover{border-color:var(--accent);color:var(--accent)}
-section{padding:22px 0 6px}
-h2{font-size:20px;margin:0 0 12px}
-.day{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;overflow:hidden}
-.day>summary{list-style:none;cursor:pointer;padding:14px 16px;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center}
-.day>summary::-webkit-details-marker{display:none}
-.date{background:var(--surface-2);border-radius:10px;text-align:center;padding:6px 8px;min-width:54px}
-.date b{display:block;font-size:18px;line-height:1.1}
-.date span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
-.dtitle{font-weight:650;font-size:15.5px;line-height:1.3}
-.dsub{font-size:13px;color:var(--muted);margin-top:2px}
-.tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
-.tag{font-size:10.5px;font-weight:700;letter-spacing:.06em;padding:2px 7px;border-radius:6px;border:1px solid currentColor;text-transform:uppercase}
-.tag.train{color:var(--t-train)} .tag.bus{color:var(--t-bus)} .tag.snow{color:var(--t-snow)} .tag.trek{color:var(--t-trek)}
-.tag.fly{color:var(--t-fly)} .tag.city{color:var(--t-city)} .tag.stay{color:var(--t-stay)}
-.chev{color:var(--muted);transition:transform .2s;font-size:14px}
-.day[open] .chev{transform:rotate(90deg)}
-.body{padding:2px 16px 16px;border-top:1px solid var(--border)}
-.tl{list-style:none;margin:12px 0 0;padding:0}
-.tl li{display:grid;grid-template-columns:92px 1fr;gap:10px;padding:7px 0;border-bottom:1px dashed var(--border)}
-.tl li:last-child{border-bottom:0}
-.tl time{font-variant-numeric:tabular-nums;font-size:13px;color:var(--muted);font-weight:600}
-.tl ul{margin:4px 0 0;padding-left:18px}
-.tl ul li{display:list-item;border:0;padding:1px 0}
-.note{border-radius:10px;padding:10px 12px;margin:12px 0 0;font-size:14px}
-.note.warn{background:var(--warn-soft)} .note.warn b{color:var(--warn)}
-.note.danger{background:var(--danger-soft)} .note.danger b{color:var(--danger)}
-.note.info{background:var(--accent-soft)}
-.note ul{margin:6px 0 0;padding-left:18px}
-.stay{margin-top:12px;font-size:13.5px;color:var(--muted)}
-.stay b{color:var(--text)}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:12px}
-.card h3{font-size:15.5px;margin:0 0 6px}
-.card ul{margin:6px 0 0;padding-left:18px}
-.card li{margin:3px 0}
-.rec{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ok);background:var(--ok-soft);border-radius:6px;padding:1px 7px;margin-left:4px}
-table{width:100%;border-collapse:collapse;font-size:14px}
-th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--border);vertical-align:top}
-th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600}
-.tablewrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow-x:auto}
-.status{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:6px;padding:2px 7px;white-space:nowrap}
-.status.todo{color:var(--danger);background:var(--danger-soft)}
-.status.watch{color:var(--warn);background:var(--warn-soft)}
-.status.decide{color:var(--accent);background:var(--accent-soft)}
-footer{color:var(--muted);font-size:13px;padding:24px 0 40px;border-top:1px solid var(--border);margin-top:24px}
-.toggle{position:absolute;top:16px;right:16px;background:var(--surface);border:1px solid var(--border);color:var(--text);border-radius:999px;padding:6px 10px;font-size:13px;cursor:pointer}
-.hero{position:relative}
-@media (max-width:520px){
-  h1{font-size:25px}
-  .tl li{grid-template-columns:1fr;gap:2px}
-  .day>summary{gap:10px;padding:12px 14px}
-  .body{padding:2px 14px 14px}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;padding:32px 20px 60px;background-color:var(--bg);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;color:#fff;font-family:Virgil,"Segoe Print","Comic Sans MS",cursive;line-height:1.45}
+a{color:#fff}
+.wrap{max-width:900px;margin:0 auto}
+header{text-align:center;margin-bottom:18px}
+h1{font-size:2.3rem;font-weight:normal;margin:0 0 6px}
+header p{margin:0;opacity:.8}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:22px 0}
+.sum{border:2px solid var(--line);border-radius:4px;padding:12px 14px}
+.sum b{display:block;font-weight:normal;font-size:.85rem;opacity:.75}
+.sum span{font-size:1.1rem}
+.nav{position:sticky;top:0;z-index:2;display:flex;flex-wrap:wrap;gap:8px;padding:10px 0;margin-bottom:20px;
+  background-color:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px}
+.nav a{border:1px solid var(--line);border-radius:999px;padding:5px 12px;text-decoration:none;font-size:.9rem}
+.nav a:hover{background:rgba(255,255,255,.15)}
+h2{font-weight:normal;font-size:1.6rem;margin:34px 0 12px}
+.timeline{border-left:2px solid var(--line);margin-left:8px}
+.day{border:2px solid var(--line);border-radius:4px;margin:0 0 16px 22px;position:relative}
+.day:before{content:"";position:absolute;left:-33px;top:19px;width:12px;height:12px;border-radius:50%;background:#fff}
+.day summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}
+.day summary::-webkit-details-marker{display:none}
+.date{opacity:.8;font-size:.9rem;white-space:nowrap}
+.kind{border:1px solid var(--line);border-radius:999px;padding:1px 9px;font-size:.75rem;white-space:nowrap;letter-spacing:.04em}
+.day h3{flex:1 1 100%;margin:0;font-weight:normal;font-size:1.25rem;order:3}
+.day .sub{flex:1 1 100%;order:4;opacity:.75;font-size:.9rem;margin-top:-4px}
+.arrow{margin-left:auto;transition:transform .2s}
+.day[open] .arrow{transform:rotate(90deg)}
+.body{border-top:1px dashed var(--line);padding:12px 16px 16px}
+.body ul{list-style:none;margin:0;padding:0}
+.body li{display:flex;justify-content:space-between;gap:14px;padding:6px 0;border-bottom:1px dashed var(--soft)}
+.body li:last-child{border-bottom:0}
+.body li b{font-weight:normal;white-space:nowrap;opacity:.85;text-align:right}
+.heads{border:1px dashed var(--line);border-radius:4px;padding:10px 12px;margin-top:12px}
+.heads p{margin:0 0 4px}
+.sleep{margin-top:12px;opacity:.85}
+section.box{border:2px solid var(--line);border-radius:4px;padding:14px 16px;margin-bottom:16px}
+section.box h3{margin:0 0 8px;font-weight:normal;font-size:1.2rem}
+.box ul{list-style:none;margin:0;padding:0}
+.box li{display:flex;justify-content:space-between;gap:14px;padding:6px 0;border-bottom:1px dashed var(--soft)}
+.box li:last-child{border-bottom:0}
+.box li b{font-weight:normal;white-space:nowrap;text-align:right}
+.tag{border:1px solid var(--line);border-radius:999px;padding:1px 9px;font-size:.72rem;white-space:nowrap;letter-spacing:.05em}
+.tag.now{background:#fff;color:var(--bg)}
+footer{text-align:center;opacity:.65;font-size:.85rem;margin-top:36px}
+@media(max-width:600px){
+  body{padding:22px 14px 48px}
+  h1{font-size:1.9rem}
+  .body li,.box li{flex-direction:column;gap:0}
+  .body li b,.box li b{text-align:left;font-size:.85rem;opacity:.7}
 }
 </style>
 </head>
 <body>
-
 <div class="wrap">
-<header class="hero">
-  <button class="toggle" id="themeToggle" aria-label="Toggle dark mode">◐ Theme</button>
-  <div class="eyebrow">Team Rocket · 6 travellers</div>
-  <h1>Himachal Trip Plan 🏔️</h1>
-  <div class="route">Mumbai → Chandigarh → Manali → Sissu → Kasol → Bir → Barot → Amritsar → Mumbai</div>
-  <div class="stats">
-    <div class="stat"><b>15–23 Jan 2027</b><span>9 days · 8 nights</span></div>
-    <div class="stat"><b>6 stays</b><span>Manali ×2, Kasol, Bir, Barot, Amritsar</span></div>
-    <div class="stat alert"><b>Book trains now</b><span>Bookings open 60 days ahead</span></div>
-    <div class="stat"><b>−15°C to 10°C</b><span>Sissu nights to Manali days</span></div>
-  </div>
+
+<header>
+  <h1>Himachal Trip Blueprint</h1>
+  <p>Mumbai → Manali → Sissu → Kasol → Bir → Barot → Amritsar → Mumbai</p>
+  <p>15 – 23 Jan 2027 · 6 of us · first time up here</p>
 </header>
+
+<div class="summary">
+  <div class="sum"><b>first train</b><span>Fri 15 Jan, 6:43 pm from BDTS</span></div>
+  <div class="sum"><b>stays booked</b><span>0 / 6</span></div>
+  <div class="sum"><b>to fix</b><span>9 things (trains first!)</span></div>
+  <div class="sum"><b>coldest it gets</b><span>around −15°C at Sissu</span></div>
 </div>
 
-<nav class="chips" aria-label="Jump to">
-  <div class="wrap">
-    <a href="#todo">To do</a>
-    <a href="#day1">D1 · 15</a><a href="#day2">D2 · 16</a><a href="#day3">D3 · 17</a><a href="#day4">D4 · 18</a>
-    <a href="#day5">D5 · 19</a><a href="#day6">D6 · 20</a><a href="#day7">D7 · 21</a><a href="#day8">D8 · 22</a><a href="#day9">D9 · 23</a>
-    <a href="#bookings">Bookings</a><a href="#transport">Transport</a><a href="#tips">Tips</a>
-  </div>
+<nav class="nav">
+  <a href="#day1">15</a><a href="#day2">16</a><a href="#day3">17</a><a href="#day4">18</a><a href="#day5">19</a>
+  <a href="#day6">20</a><a href="#day7">21</a><a href="#day8">22</a><a href="#day9">23</a>
+  <a href="#getting-around">getting around</a><a href="#to-fix">to fix</a><a href="#pack">pack</a>
 </nav>
 
-<main class="wrap">
+<h2>The plan</h2>
+<div class="timeline">
 
-<section id="todo">
-  <h2>To do</h2>
-  <div class="tablewrap">
-  <table>
-    <thead><tr><th>Item</th><th>When</th><th>Status</th></tr></thead>
-    <tbody>
-      <tr><td>Train Bandra Terminus → Ambala Cantt (15 Jan, 18:43)</td><td>Opened 16 Nov, 8 AM</td><td><span class="status todo">Book now</span></td></tr>
-      <tr><td>12005 Kalka Shatabdi, Ambala → Chandigarh (16 Jan, 19:53)</td><td>Opens 17 Nov, 8 AM</td><td><span class="status todo">To book</span></td></tr>
-      <tr><td>HRTC Volvo Chandigarh → Manali (16 Jan, ~22:00), 6 seats</td><td>Opens ~17 Nov</td><td><span class="status todo">To book</span></td></tr>
-      <tr><td>Train Amritsar → Mumbai (23 or 24 Jan)</td><td>Opens 24 Nov, 8 AM</td><td><span class="status todo">To book</span></td></tr>
-      <tr><td>Wagah ceremony vs the 18:55 train on Day 9</td><td>Before booking the return train</td><td><span class="status decide">Decide</span></td></tr>
-      <tr><td>Stays: Manali (2N), Kasol, Bir, Barot homestay, Amritsar</td><td>Soon</td><td><span class="status todo">To book</span></td></tr>
-      <tr><td>Paragliding at Bir (registered operator, 20 Jan afternoon)</td><td>1–2 weeks before</td><td><span class="status todo">To book</span></td></tr>
-      <tr><td>One-way taxis: Kasol → Bir (Day 6), Barot → Amritsar (Day 8)</td><td>1–2 weeks before</td><td><span class="status todo">To book</span></td></tr>
-      <tr><td>Sissu winter tourism closure notice for 2027</td><td>Early–mid Jan</td><td><span class="status watch">Watch</span></td></tr>
-    </tbody>
-  </table>
+<details class="day" id="day1" open>
+  <summary><span class="date">Fri, 15 Jan</span><span class="kind">TRAIN</span><span class="arrow">▸</span>
+    <h3>Mumbai → Ambala</h3><span class="sub">~24 hrs on the train, ~1,570 km</span></summary>
+  <div class="body"><ul>
+    <li><span>Train from Bandra Terminus to Ambala Cantt</span><b>6:43 pm</b></li>
+    <li><span>Reach Ambala</span><b>next day 7:05 pm</b></li>
+  </ul>
+  <div class="heads"><p>heads up: january fog makes north india trains run late, sometimes by hours.</p></div>
+  <p class="sleep">sleeping: on the train</p></div>
+</details>
+
+<details class="day" id="day2">
+  <summary><span class="date">Sat, 16 Jan</span><span class="kind">TRAIN</span><span class="kind">BUS</span><span class="arrow">▸</span>
+    <h3>Ambala → Chandigarh → overnight bus to Manali</h3><span class="sub">~310 km by road, ~10 hrs</span></summary>
+  <div class="body"><ul>
+    <li><span>Kalka Shatabdi (12005) Ambala → Chandigarh</span><b>7:53 → 8:30 pm</b></li>
+    <li><span>Cab / 2 autos to ISBT Sector 43 bus stand (~10 km)</span><b>~25 min</b></li>
+    <li><span>HRTC Volvo to Manali (~₹900–1,500 a seat)</span><b>~10 pm</b></li>
+  </ul>
+  <div class="heads"><p>take the ~10 pm Volvo, not the 9:05 one. gives us room if the mumbai train is late.</p>
+    <p>if it's really late: skip the Shatabdi, cab straight from Ambala to the bus stand (~1 hr).</p></div>
+  <p class="sleep">sleeping: on the bus</p></div>
+</details>
+
+<details class="day" id="day3">
+  <summary><span class="date">Sun, 17 Jan</span><span class="kind">SNOW</span><span class="kind">MANALI</span><span class="arrow">▸</span>
+    <h3>Manali · Solang Valley · Hadimba · Old Manali</h3><span class="sub">land, crash for a bit, then snow</span></summary>
+  <div class="body"><ul>
+    <li><span>Reach Manali, check in (ask for early check-in)</span><b>~7–8 am</b></li>
+    <li><span>Sleep / shower / breakfast</span><b>till 10:30</b></li>
+    <li><span>Taxi to Solang (~14 km), one SUV fits all 6</span><b>11 am</b></li>
+    <li><span>Solang: ropeway (~₹500–750), snow scooter, tubes, skiing (~₹850–1,000+)</span><b>11:45 – 2:30</b></li>
+    <li><span>Back to Manali</span><b>2:30</b></li>
+    <li><span>Hadimba Temple + cedar forest, then Old Manali cafés</span><b>3:15 – 5:15</b></li>
+    <li><span>Mall Road, dinner, sleep early</span><b>evening</b></li>
+  </ul>
+  <div class="heads"><p>we'll be dead after 36 hrs of travel, so keep Solang chill. rent boots + jackets there. carry cash, ATMs are hit or miss.</p></div>
+  <p class="sleep">sleeping: Manali</p></div>
+</details>
+
+<details class="day" id="day4">
+  <summary><span class="date">Mon, 18 Jan</span><span class="kind">SNOW</span><span class="kind">CHECK FIRST</span><span class="arrow">▸</span>
+    <h3>Atal Tunnel → Sissu → Vashisht hot springs</h3><span class="sub">~80 km round trip, depends on snow + police</span></summary>
+  <div class="body">
+  <div class="heads" style="margin-top:0">
+    <p>check the night before:</p>
+    <p>1. Sissu shuts to tourists every winter for local festivals (2024: from 15 Jan, 2026: from 20 Jan). 2027 dates come out in early jan. 18th is right on the edge.</p>
+    <p>2. after fresh snow, police stop cars at Solang. happened most januaries.</p>
   </div>
-</section>
-
-<section id="journey">
-  <h2>Journey</h2>
-
-  <details class="day" id="day1" open>
-    <summary>
-      <div class="date"><b>15</b><span>Fri</span></div>
-      <div><div class="dtitle">Mumbai → Ambala</div><div class="dsub">Overnight train · ~1,570 km · ~24 hrs</div>
-        <div class="tags"><span class="tag train">Train</span></div></div>
-      <span class="chev">▸</span>
-    </summary>
-    <div class="body">
-      <ul class="tl">
-        <li><time>18:43</time><div>Train from Bandra Terminus (BDTS) to Ambala Cantt</div></li>
-        <li><time>Next day 19:05</time><div>Arrive Ambala Cantt</div></li>
-      </ul>
-      <div class="note info">Mid-January fog often delays trains in north India by hours. Keep Day 2's connections flexible.</div>
-      <div class="stay">🛏️ Night: <b>on the train</b></div>
-    </div>
-  </details>
-
-  <details class="day" id="day2">
-    <summary>
-      <div class="date"><b>16</b><span>Sat</span></div>
-      <div><div class="dtitle">Ambala → Chandigarh → Manali</div><div class="dsub">Shatabdi + overnight HRTC Volvo · ~310 km by road</div>
-        <div class="tags"><span class="tag train">Train</span><span class="tag bus">Bus</span></div></div>
-      <span class="chev">▸</span>
-    </summary>
-    <div class="body">
-      <ul class="tl">
-        <li><time>19:05</time><div>Reach Ambala Cantt</div></li>
-        <li><time>19:53</time><div>12005 Kalka Shatabdi → Chandigarh (arr. 20:30), chair car</div></li>
-        <li><time>20:30</time><div>Chandigarh station → ISBT Sector 43 bus stand (~10 km, ~25 min). Uber/Ola XL or 2 autos</div></li>
-        <li><time>~22:00</time><div>HRTC HimSuta Volvo → Manali (~10 hrs, ~₹900–1,500 a seat). Ordinary HRTC buses run till ~23:00</div></li>
-      </ul>
-      <div class="note warn"><b>Tight connection.</b> Prefer the ~22:00 Volvo over 21:05 in case the Mumbai train is late. If it's very late, skip the Shatabdi and take a cab from Ambala straight to ISBT 43 (~1 hr).</div>
-      <div class="stay">🛏️ Night: <b>on the bus</b></div>
-    </div>
-  </details>
-
-  <details class="day" id="day3">
-    <summary>
-      <div class="date"><b>17</b><span>Sun</span></div>
-      <div><div class="dtitle">Manali · Solang Valley · Hadimba · Old Manali</div><div class="dsub">Arrive, rest, snow activities in the afternoon</div>
-        <div class="tags"><span class="tag snow">Snow</span><span class="tag city">Local</span></div></div>
-      <span class="chev">▸</span>
-    </summary>
-    <div class="body">
-      <ul class="tl">
-        <li><time>~7–8 AM</time><div>Reach Manali, hotel check-in (ask for early check-in in advance)</div></li>
-        <li><time>till 10:30</time><div>Freshen up, breakfast, rest</div></li>
-        <li><time>11:00</time><div>Taxi Manali → Solang (~14 km, ~40 min). Manali union SUV fits all 6</div></li>
-        <li><time>11:45–2:30</time><div><b>Solang Valley</b>, no police permission needed up to Solang
-          <ul>
-            <li>🎿 Skiing, season Jan–early Mar (~₹850–1,000+ per session)</li>
-            <li>❄️ Snow scooter, tube slide, snow play</li>
-            <li>🚡 Ropeway, if operating (~9 AM–5 PM, ~₹500–750 per person)</li>
-            <li>Rent snow boots and jackets here. Carry cash, ATMs are unreliable</li>
-          </ul></div></li>
-        <li><time>2:30</time><div>Back to Manali</div></li>
-        <li><time>3:15–5:15</time><div>🛕 Hadimba Devi Temple + cedar forest (~2 km from Mall Road) · ☕ Old Manali cafés, Manu Temple (~3 km)</div></li>
-        <li><time>Evening</time><div>Mall Road walk, dinner, early night</div></li>
-      </ul>
-      <div class="note info">Just off a ~36-hour journey: keep Solang light (ropeway, snow play, photos). If Sissu is closed tomorrow, you can come back to Solang for skiing.</div>
-      <div class="stay">🛏️ Night: <b>Manali</b></div>
-    </div>
-  </details>
-
-  <details class="day" id="day4">
-    <summary>
-      <div class="date"><b>18</b><span>Mon</span></div>
-      <div><div class="dtitle">Atal Tunnel → Sissu → Vashisht</div><div class="dsub">~80 km round trip · depends on snow and police</div>
-        <div class="tags"><span class="tag snow">Snow</span><span class="tag stay">Check first</span></div></div>
-      <span class="chev">▸</span>
-    </summary>
-    <div class="body">
-      <div class="note danger"><b>Check the evening before and that morning</b>
-        <ul>
-          <li><b>Sissu tourism closure:</b> every winter the Sissu village council shuts tourism for the Halda/Losar festivals (2024: 15 Jan–28 Feb; 2026: 20 Jan–28 Feb). The 2027 dates usually come out in early to mid January. 18 Jan is right at the edge.</li>
-          <li><b>Road past Solang:</b> after fresh snow, police stop tourist vehicles at Solang Nala, sometimes for days (Jan 2021, 2022, 2023 and 2026).</li>
-        </ul>
-      </div>
-      <ul class="tl">
-        <li><time>Before</time><div>Book a Manali union <b>4x4 (Scorpio) with snow chains</b>, ~₹3,000–6,000 per vehicle. After snow only 4x4s are let through. The driver usually handles the e-Aagman vehicle registration (eaagman.hp.gov.in) and the small entry taxes</div></li>
-        <li><time>9:00</time><div>Leave Manali → Solang Nala barrier (~14 km)</div></li>
-        <li><time>~10:00</time><div>In past winters vehicles were let past Solang only from ~10 AM and had to return through the tunnel by 3–4 PM</div></li>
-        <li><time>Late morning</time><div><b>Atal Tunnel</b> (~9 km, no toll, no stopping inside) → <b>Sissu</b> (~40 km from Manali)
-          <ul>
-            <li>Sissu viewpoint, Chandra River, partly frozen waterfall</li>
-            <li>Snow photography, village walk</li>
-            <li>Tea and Maggi at roadside stalls (may be shut if the closure is on)</li>
-            <li>Park where police direct you</li>
-          </ul></div></li>
-        <li><time>2:00–2:30</time><div>Head back through the tunnel</div></li>
-        <li><time>3:30–4:00</time><div>Back in Manali (sunset ~5:40 PM, black ice after dark)</div></li>
-        <li><time>4:00–5:30</time><div>♨️ Vashisht Temple + hot springs (~3 km from Mall Road)</div></li>
-      </ul>
-      <div class="card" style="margin-top:12px">
-        <h3>How the day can go</h3>
-        <ul>
-          <li><b>Road open, Sissu open</b>: plan as above</li>
-          <li><b>Road open, Sissu closed</b>: ask police at Solang about going to the tunnel's far end for photos, otherwise a second Solang visit</li>
-          <li><b>Road closed past Solang</b>: Solang again or a rest morning, then Vashisht + the Jogini Falls walk</li>
-          <li><b>Heavy snow falling</b>: don't go past Solang even if allowed</li>
-        </ul>
-      </div>
-      <div class="stay">Weather: Sissu ~−2°C to 5°C by day, −8°C to −15°C at night · 🛏️ Night: <b>Manali</b></div>
-    </div>
-  </details>
-
-  <details class="day" id="day5">
-    <summary>
-      <div class="date"><b>19</b><span>Tue</span></div>
-      <div><div class="dtitle">Manali → Kullu → Kasol → Manikaran</div><div class="dsub">~90 km by local buses · Chalal trek optional</div>
-        <div class="tags"><span class="tag bus">Bus</span><span class="tag trek">Trek</span><span class="tag city">Local</span></div></div>
-      <span class="chev">▸</span>
-    </summary>
-    <div class="body">
-      <ul class="tl">
-        <li><time>8:00</time><div>Local bus Manali → Kullu (~40 km, ~1.5 hrs). Pay on board in cash</div></li>
-        <li><time>9:30–11:30</time><div><b>Kullu</b>: Raghunath Temple, market, handicrafts, Kullu shawls and caps, Beas River views</div></li>
-        <li><time>~12:00</time><div>Bus Kullu → Bhuntar (~10 km) → Kasol (~31 km), ~1.5 hrs</div></li>
-        <li><time>1–2 PM</time><div>Check in at Kasol, lunch</div></li>
-        <li><time>2:30–4:00</time><div>🥾 <b>Chalal trek</b> (if willing): ~2–2.5 km each way, 30–45 min one way along the Parvati River. Shaded parts can be icy, wear shoes with grip</div></li>
-        <li><time>~4:15</time><div>Local bus or shared taxi → <b>Manikaran</b> (~4 km): gurudwara and langar, hot springs, temple, Parvati River</div></li>
-        <li><time>~6:00</time><div>Back to Kasol: market, riverside cafés (some closed, it's off-season), shops</div></li>
-      </ul>
-      <div class="stay">🛏️ Night: <b>Kasol</b></div>
-    </div>
-  </details>
-
-  <details class="day" id="day6">
-    <summary>
-      <div class="date"><b>20</b><span>Wed</span></div>
-      <div><div class="dtitle">Kasol → Bir · Paragliding</div><div class="dsub">~155–200 km · ~5.5–6 hrs · one-way taxi</div>
-        <div class="tags"><span class="tag bus">Taxi</span><span class="tag fly">Paragliding</span></div></div>
-      <span class="chev">▸</span>
-    </summary>
-    <div class="body">
-      <ul class="tl">
-        <li><time>6:00</time><div>Wake up, breakfast, pack</div></li>
-        <li><time>7:00</time><div>One-way taxi (Innova Crysta / Ertiga), ~₹4,000–6,000 per vehicle (~₹700–1,000 each). Kasol → Bhuntar → Mandi → Jogindernagar → Bir</div></li>
-        <li><time>12:30–1:00</time><div>Arrive Bir, check in, lunch</div></li>
-        <li><time>2:00–3:00</time><div>🪂 <b>Paragliding, Billing → Bir</b>. The operator drives you ~14 km up to Billing, then you fly down to Bir. Weather-dependent: if cancelled, use tomorrow morning</div></li>
-        <li><time>Evening</time><div>Tibetan Colony, Bir market, cafés</div></li>
-      </ul>
-      <div class="note info">There's no direct daytime bus. By bus (with 2–3 changes) you'd reach Bir around 1–2 PM, too late for a 2 PM flight.</div>
-      <div class="stay">🛏️ Night: <b>Bir</b></div>
-    </div>
-  </details>
-
-  <details class="day" id="day7">
-    <summary>
-      <div class="date"><b>21</b><span>Thu</span></div>
-      <div><div class="dtitle">Bir → Barot Valley</div><div class="dsub">~55–80 km · ~3 hrs · local bus + shared jeep</div>
-        <div class="tags"><span class="tag bus">Bus</span><span class="tag stay">Relax</span></div></div>
-      <span class="chev">▸</span>
-    </summary>
-    <div class="body">
-      <ul class="tl">
-        <li><time>8:30–10:30</time><div>Backup paragliding slot if yesterday got cancelled. Otherwise the monastery and tea gardens</div></li>
-        <li><time>11:00</time><div>Bus Bir (Chowgan Chowk) → Jogindernagar (~16 km) → Ghatasani (~14 km) → shared jeep or bus to Barot (~25 km, every 45–60 min till ~5 PM, ~₹50–60 each)</div></li>
-        <li><time>2:00–3:00</time><div>Reach Barot, riverside homestay, lunch</div></li>
-        <li><time>4:00–6:00</time><div>🌊 Uhl River · valley viewpoints · short walks · Barot reservoir · photos. Keep it relaxed</div></li>
-        <li><time>Evening</time><div>Dinner at the homestay</div></li>
-      </ul>
-      <div class="note warn"><b>Snow risk:</b> the Ghatasani–Barot road can get snow in January; check the day before. A newer ~38 km Bir–Billing–Barot road exists but crosses high ground and may be snowbound. Ask in Bir.</div>
-      <div class="stay">🛏️ Night: <b>Barot</b></div>
-    </div>
-  </details>
-
-  <details class="day" id="day8">
-    <summary>
-      <div class="date"><b>22</b><span>Fri</span></div>
-      <div><div class="dtitle">Barot → Amritsar</div><div class="dsub">~320–370 km · ~9–10 hrs · one-way taxi</div>
-        <div class="tags"><span class="tag bus">Taxi</span><span class="tag city">Golden Temple</span></div></div>
-      <span class="chev">▸</span>
-    </summary>
-    <div class="body">
-      <ul class="tl">
-        <li><time>Morning</time><div>Breakfast, Uhl River walk, photos</div></li>
-        <li><time>12:00</time><div>One-way taxi (Ertiga / Innova), ~₹4,000–6,000 per vehicle (~₹700–1,000 each). Barot → Ghatasani → Jogindernagar → Baijnath → Palampur → Kangra → Pathankot → Amritsar</div></li>
-        <li><time>~2:30</time><div>Lunch at Baijnath or Palampur</div></li>
-        <li><time>~6:30–7:00</time><div>Pathankot. Dark by now; fog is common on the plains at night</div></li>
-        <li><time>~9:30–10:30</time><div>Reach Amritsar, check in, dinner. The Golden Temple is open all night if you have the energy</div></li>
-      </ul>
-      <div class="note info">Buses won't work at this time: direct HRTC buses to Amritsar leave Baijnath/Palampur only in the morning (last ~11–11:50 AM).</div>
-      <div class="stay">🛏️ Night: <b>Amritsar</b></div>
-    </div>
-  </details>
-
-  <details class="day" id="day9">
-    <summary>
-      <div class="date"><b>23</b><span>Sat</span></div>
-      <div><div class="dtitle">Amritsar → Mumbai</div><div class="dsub">Golden Temple, Jallianwala Bagh, train home</div>
-        <div class="tags"><span class="tag city">City</span><span class="tag train">Train</span></div></div>
-      <span class="chev">▸</span>
-    </summary>
-    <div class="body">
-      <ul class="tl">
-        <li><time>Dawn</time><div>Golden Temple, quieter early morning</div></li>
-        <li><time>Morning</time><div>Jallianwala Bagh (~400 m) · Partition Museum, Town Hall (~500 m)</div></li>
-        <li><time>Lunch</time><div>Amritsari kulcha + lassi</div></li>
-        <li><time>Option</time><div>Wagah ceremony (~30 km): shared rickshaws from near the Golden Temple, ~₹150 each, leave ~2 PM. Ceremony ~4:15–5:15 PM in winter; Saturday crowds</div></li>
-      </ul>
-      <div class="card" style="margin-top:12px">
-        <h3>Train home</h3>
-        <ul>
-          <li><b>12904 Golden Temple Mail</b>: 18:55 → Mumbai Central next day ~23:35 (~29 hrs)</li>
-          <li><b>12926 Paschim Express</b>: 07:20 → Bandra Terminus next day ~14:40 (~31 hrs)</li>
-        </ul>
-      </div>
-      <div class="note warn"><b>Decide:</b> Wagah ends too late for the 18:55 train. Skip Wagah, or stay one more night and take the Paschim Express at 07:20 on 24 Jan.</div>
-    </div>
-  </details>
-</section>
-
-<section id="bookings">
-  <h2>Booking calendar</h2>
-  <div class="tablewrap">
-  <table>
-    <thead><tr><th>Booking opens</th><th>For</th><th>Where</th></tr></thead>
-    <tbody>
-      <tr><td><b>16 Nov 2026</b>, 8 AM</td><td>BDTS → Ambala Cantt train (15 Jan)</td><td>IRCTC</td></tr>
-      <tr><td><b>17 Nov 2026</b>, 8 AM</td><td>12005 Kalka Shatabdi, Ambala → Chandigarh (16 Jan)</td><td>IRCTC</td></tr>
-      <tr><td><b>~17 Nov 2026</b></td><td>HRTC Volvo Chandigarh → Manali (16 Jan), 6 seats</td><td>online.hrtchp.com / redBus</td></tr>
-      <tr><td><b>24 Nov 2026</b>, 8 AM</td><td>Amritsar → Mumbai train (23 Jan)</td><td>IRCTC</td></tr>
-    </tbody>
-  </table>
+  <ul style="margin-top:8px">
+    <li><span>Book a local 4x4 (Scorpio) with snow chains, ~₹3,000–6,000. driver sorts the e-Aagman pass + entry tax</span><b>night before</b></li>
+    <li><span>Leave Manali</span><b>9 am</b></li>
+    <li><span>Solang barrier. in past winters they let cars through only from ~10 am</span><b>~10 am</b></li>
+    <li><span>Atal Tunnel (9 km) → Sissu: viewpoint, Chandra river, frozen-ish waterfall, maggi</span><b>late morning</b></li>
+    <li><span>Head back through the tunnel (they wanted people back by 3–4 pm)</span><b>2 – 2:30</b></li>
+    <li><span>Back in Manali</span><b>3:30 – 4</b></li>
+    <li><span>Vashisht temple + hot springs. best way to end a cold day</span><b>4 – 5:30</b></li>
+  </ul>
+  <div class="heads">
+    <p>if Sissu's closed → ask police at Solang if we can at least go to the tunnel's far end, else Solang round 2</p>
+    <p>if road's closed → Solang again or sleep in, then Vashisht + Jogini Falls walk</p>
+    <p>if it's snowing hard → don't go past Solang, people have been stuck there for hours</p>
   </div>
-  <p class="dsub">Trains and HRTC open 60 days ahead. One IRCTC booking takes up to 6 passengers, so the whole group fits on one ticket.</p>
+  <p class="sleep">sleeping: Manali · Sissu goes down to −8 to −15°C at night</p></div>
+</details>
+
+<details class="day" id="day5">
+  <summary><span class="date">Tue, 19 Jan</span><span class="kind">BUS</span><span class="kind">TREK</span><span class="arrow">▸</span>
+    <h3>Manali → Kullu → Kasol → Manikaran</h3><span class="sub">~90 km on local buses</span></summary>
+  <div class="body"><ul>
+    <li><span>Local bus to Kullu (~40 km), pay cash on board</span><b>8 am</b></li>
+    <li><span>Kullu: Raghunath Temple, market, Kullu shawls + caps</span><b>9:30 – 11:30</b></li>
+    <li><span>Bus Kullu → Bhuntar → Kasol (~40 km)</span><b>~12</b></li>
+    <li><span>Check in, lunch</span><b>1 – 2 pm</b></li>
+    <li><span>Chalal trek: 2–2.5 km each way along the Parvati (shoes with grip, bits get icy)</span><b>2:30 – 4</b></li>
+    <li><span>Bus / shared taxi to Manikaran (~4 km): gurudwara, langar, hot springs</span><b>~4:15</b></li>
+    <li><span>Back in Kasol: market, cafés (some shut, it's off-season)</span><b>~6 pm</b></li>
+  </ul>
+  <p class="sleep">sleeping: Kasol</p></div>
+</details>
+
+<details class="day" id="day6">
+  <summary><span class="date">Wed, 20 Jan</span><span class="kind">TAXI</span><span class="kind">PARAGLIDING</span><span class="arrow">▸</span>
+    <h3>Kasol → Bir, then fly</h3><span class="sub">~155–200 km, ~6 hrs</span></summary>
+  <div class="body"><ul>
+    <li><span>Wake up, pack</span><b>6 am</b></li>
+    <li><span>One-way taxi via Mandi + Jogindernagar (~₹4,000–6,000 for the car, ~₹700–1,000 each)</span><b>7 am</b></li>
+    <li><span>Reach Bir, check in, lunch</span><b>12:30 – 1</b></li>
+    <li><span>Paragliding: they drive us up to Billing (~14 km), we fly down to Bir</span><b>2 – 3 pm</b></li>
+    <li><span>Tibetan colony, cafés, chill</span><b>evening</b></li>
+  </ul>
+  <div class="heads"><p>no direct day bus, and with 2–3 changes we'd miss the flight. taxi it is.</p>
+    <p>flying depends on weather. if it's cancelled, we try again tomorrow morning.</p></div>
+  <p class="sleep">sleeping: Bir</p></div>
+</details>
+
+<details class="day" id="day7">
+  <summary><span class="date">Thu, 21 Jan</span><span class="kind">BUS</span><span class="kind">CHILL</span><span class="arrow">▸</span>
+    <h3>Bir → Barot Valley</h3><span class="sub">~55–80 km, ~3 hrs</span></summary>
+  <div class="body"><ul>
+    <li><span>Backup paragliding slot, or the monastery + tea gardens</span><b>8:30 – 10:30</b></li>
+    <li><span>Bus to Jogindernagar → Ghatasani → shared jeep to Barot (~₹50–60 each)</span><b>11 am</b></li>
+    <li><span>Reach Barot, riverside homestay, lunch</span><b>2 – 3 pm</b></li>
+    <li><span>Uhl river, short valley walks, the reservoir, photos. no checklist, just chill</span><b>4 – 6 pm</b></li>
+    <li><span>Dinner at the homestay</span><b>night</b></li>
+  </ul>
+  <div class="heads"><p>the road into Barot can get snow. check the day before. jeeps stop running around 5 pm.</p></div>
+  <p class="sleep">sleeping: Barot</p></div>
+</details>
+
+<details class="day" id="day8">
+  <summary><span class="date">Fri, 22 Jan</span><span class="kind">TAXI</span><span class="kind">LONG DRIVE</span><span class="arrow">▸</span>
+    <h3>Barot → Amritsar</h3><span class="sub">~320–370 km, ~9–10 hrs</span></summary>
+  <div class="body"><ul>
+    <li><span>Slow morning by the river</span><b>morning</b></li>
+    <li><span>One-way taxi via Palampur, Kangra, Pathankot (~₹4,000–6,000 for the car)</span><b>12 pm</b></li>
+    <li><span>Lunch at Baijnath / Palampur</span><b>~2:30</b></li>
+    <li><span>Pathankot. dark by now and foggy on the plains</span><b>~6:30 – 7</b></li>
+    <li><span>Amritsar, check in, food. Golden Temple is open all night if we're up for it</span><b>~9:30 – 10:30 pm</b></li>
+  </ul>
+  <div class="heads"><p>buses won't work leaving at noon. the direct ones to Amritsar all leave before ~11:30 am.</p></div>
+  <p class="sleep">sleeping: Amritsar</p></div>
+</details>
+
+<details class="day" id="day9">
+  <summary><span class="date">Sat, 23 Jan</span><span class="kind">CITY</span><span class="kind">TRAIN</span><span class="arrow">▸</span>
+    <h3>Amritsar → home</h3><span class="sub">Golden Temple, kulchas, train</span></summary>
+  <div class="body"><ul>
+    <li><span>Golden Temple at dawn, way less crowded</span><b>early</b></li>
+    <li><span>Jallianwala Bagh + Partition Museum, both walking distance</span><b>morning</b></li>
+    <li><span>Amritsari kulcha + lassi</span><b>lunch</b></li>
+    <li><span>Wagah ceremony? shared rickshaw ~₹150 each, leave ~2 pm</span><b>maybe</b></li>
+    <li><span>Golden Temple Mail (12904) → Mumbai Central, ~29 hrs</span><b>6:55 pm</b></li>
+  </ul>
+  <div class="heads"><p>catch: Wagah finishes too late for the 6:55 pm train.</p>
+    <p>either skip Wagah, or stay one more night and take Paschim Express (12926) at 7:20 am on the 24th.</p></div>
+  <p class="sleep">home: Sunday night or Monday</p></div>
+</details>
+
+</div>
+
+<h2 id="getting-around">Getting around</h2>
+<section class="box"><h3>Bookings (they open 60 days before)</h3><ul>
+  <li><span>BDTS → Ambala train, 15 Jan. all 6 fit on one ticket</span><b>opened 16 Nov, 8 am</b></li>
+  <li><span>Kalka Shatabdi Ambala → Chandigarh, 16 Jan</span><b>17 Nov, 8 am</b></li>
+  <li><span>HRTC Volvo Chandigarh → Manali, 16 Jan (online.hrtchp.com)</span><b>~17 Nov</b></li>
+  <li><span>Amritsar → Mumbai train, 23 Jan</span><b>24 Nov, 8 am</b></li>
+</ul></section>
+<section class="box"><h3>How we move each day</h3><ul>
+  <li><span>Manali → Solang, Manali → Sissu</span><b>local taxi (SUV / 4x4)</b></li>
+  <li><span>Manali → Kullu → Kasol → Manikaran</span><b>local buses</b></li>
+  <li><span>Kasol → Bir</span><b>one-way taxi</b></li>
+  <li><span>Bir → Barot</span><b>bus + shared jeep</b></li>
+  <li><span>Barot → Amritsar</span><b>one-way taxi</b></li>
+  <li><span>Amritsar</span><b>walk + rickshaw</b></li>
+</ul>
+<p class="note" style="opacity:.75;margin:10px 0 0">luggage for 6 is tight in an Innova / Ertiga. ask for a roof carrier or get a tempo traveller.</p>
 </section>
 
-<section id="transport">
-  <h2>Getting around</h2>
-  <div class="card"><h3>Manali (Days 3–4)</h3>
-    <ul>
-      <li>Solang round trip: Manali taxi-union SUV (Innova/Scorpio, fits 6), ~₹2,000–4,500 per vehicle</li>
-      <li>Sissu: union 4x4 with snow chains, ~₹3,000–6,000 per vehicle; book the evening before</li>
-      <li>The HRTC Manali → Keylong bus passes Sissu, but winter services are few and the return is unreliable</li>
-      <li>Hadimba, Old Manali, Vashisht: walk or autos</li>
-    </ul></div>
-  <div class="card"><h3>Manali → Kasol (Day 5) <span class="rec">Bus</span></h3>
-    <ul>
-      <li>Frequent local buses Manali → Kullu, then Kullu/Bhuntar → Kasol (buses towards Manikaran)</li>
-      <li>Kasol ↔ Manikaran: Bhuntar–Manikaran local buses (~6 AM–6:30 PM) or a shared taxi</li>
-    </ul></div>
-  <div class="card"><h3>Kasol → Bir (Day 6) <span class="rec">Taxi</span></h3>
-    <ul>
-      <li>One-way Innova Crysta / Ertiga, ~₹4,000–6,000 per vehicle</li>
-      <li>Bus alternative: Kasol → Bhuntar → HRTC towards Baijnath/Palampur → Bir turn-off → local taxi (~6–7 hrs)</li>
-    </ul></div>
-  <div class="card"><h3>Bir → Barot (Day 7) <span class="rec">Bus</span></h3>
-    <ul>
-      <li>Bus from Bir (Chowgan Chowk) to Jogindernagar or Barot. Shared jeeps from Ghatasani every 45–60 min till ~5 PM</li>
-      <li>Buses to and from Barot thin out after ~4 PM in winter</li>
-    </ul></div>
-  <div class="card"><h3>Barot → Amritsar (Day 8) <span class="rec">Taxi</span></h3>
-    <ul>
-      <li>One-way Ertiga / Innova, ~₹4,000–6,000 per vehicle</li>
-      <li>Bus only works if you leave Barot by ~7 AM (Jogindernagar → HRTC to Amritsar)</li>
-    </ul></div>
-  <p class="dsub">Luggage for 6 is tight in an Innova or Ertiga: ask for a roof carrier, or take a Tempo Traveller.</p>
-</section>
+<h2 id="to-fix">To fix</h2>
+<section class="box"><ul>
+  <li><span>Book the BDTS → Ambala train</span><b><span class="tag now">DO IT NOW</span></b></li>
+  <li><span>Book Shatabdi + HRTC Volvo (16 Jan)</span><b><span class="tag">17 NOV</span></b></li>
+  <li><span>Book the train home</span><b><span class="tag">24 NOV</span></b></li>
+  <li><span>Wagah or the 6:55 pm train?</span><b><span class="tag">DECIDE</span></b></li>
+  <li><span>Stays: Manali ×2, Kasol, Bir, Barot, Amritsar</span><b><span class="tag">TO BE ADDED</span></b></li>
+  <li><span>Paragliding slot in Bir</span><b><span class="tag">TO BE ADDED</span></b></li>
+  <li><span>Taxis for Kasol → Bir and Barot → Amritsar</span><b><span class="tag">TO BE ADDED</span></b></li>
+  <li><span>Sissu winter closure dates for 2027</span><b><span class="tag">WATCH IN JAN</span></b></li>
+  <li><span>Road status before every hill day</span><b><span class="tag">NIGHT BEFORE</span></b></li>
+</ul></section>
 
-<section id="tips">
-  <h2>Tips</h2>
-  <div class="card">
-    <ul>
-      <li>🧥 Layers, gloves, woollen cap, sunglasses for the snow glare. Rent snow boots in Manali or Solang</li>
-      <li>💵 Carry cash: ATMs around Solang and Sissu are unreliable; local buses take cash only</li>
-      <li>🌙 Finish every hill drive before dark (~5:30 PM). Roads ice over after sunset</li>
-      <li>❄️ Check road and snow status the evening before every hill day</li>
-      <li>📏 Distances and fares are approximate (travel and cab sites often disagree). Confirm on Google Maps and with operators</li>
-    </ul>
-  </div>
-</section>
+<h2 id="pack">Pack + know</h2>
+<section class="box"><ul>
+  <li><span>Layers, gloves, woolly cap, sunglasses (snow glare is real)</span><b>clothes</b></li>
+  <li><span>Snow boots + jackets can be rented in Manali / Solang</span><b>rent</b></li>
+  <li><span>Cash. local buses are cash only, ATMs up there are hit or miss</span><b>money</b></li>
+  <li><span>No hill driving after dark (~5:30 pm). roads ice over</span><b>rule</b></li>
+  <li><span>Distances + prices are rough, sites disagree. double-check before paying</span><b>fyi</b></li>
+</ul></section>
 
-<footer>
-  Plan last updated 16 Nov 2026 · Timings and fares from booking sites and travel guides; recheck a few days before travel.
-</footer>
-</main>
+<footer>made by team rocket · last updated 16 Nov 2026</footer>
+</div>
 
 <script>
-(function(){
-  var root=document.documentElement, key="theme";
-  try{var s=localStorage.getItem(key); if(s) root.setAttribute("data-theme",s);}catch(e){}
-  document.getElementById("themeToggle").addEventListener("click",function(){
-    var cur=root.getAttribute("data-theme");
-    var dark=cur?cur==="dark":window.matchMedia("(prefers-color-scheme: dark)").matches;
-    var next=dark?"light":"dark"; root.setAttribute("data-theme",next);
-    try{localStorage.setItem(key,next);}catch(e){}
-  });
-  // Open a day card when jumped to from the nav
-  function openHash(){var el=document.querySelector(location.hash); if(el&&el.tagName==="DETAILS") el.open=true;}
-  window.addEventListener("hashchange",openHash); if(location.hash) openHash();
-})();
+// open a day when you jump to it from the nav
+function openHash(){var el=location.hash&&document.querySelector(location.hash);if(el&&el.tagName==="DETAILS")el.open=true}
+addEventListener("hashchange",openHash);openHash();
 </script>
 </body>
 </html>
